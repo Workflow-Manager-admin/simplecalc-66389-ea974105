@@ -5,10 +5,11 @@ import AdditionGame from './AdditionGame';
 import SubtractionGame from './SubtractionGame';
 import MultiplicationGame from './MultiplicationGame';
 import DivisionGame from './DivisionGame';
+import FactorialGame from './FactorialGame';
 
 // PUBLIC_INTERFACE
 function App() {
-  // Mode: 'calc', 'add', 'sub', 'mul', 'div'
+  // Mode: 'calc', 'add', 'sub', 'mul', 'div', 'fact'
   const [mode, setMode] = useState('calc');
 
   let mainHeader = '';
@@ -22,6 +23,8 @@ function App() {
     mainHeader = "Multiplication Game";
   } else if (mode === 'div') {
     mainHeader = "Division Game";
+  } else if (mode === 'fact') {
+    mainHeader = "Factorial Game";
   }
 
   return (
@@ -143,6 +146,25 @@ function App() {
           >
             Division Game
           </button>
+          <button
+            onClick={() => setMode('fact')}
+            className="calc-btn"
+            style={{
+              background: mode === 'fact' ? '#1976d2' : '#ececec',
+              color: mode === 'fact' ? '#fff' : '#1976d2',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '10px',
+              border: mode === 'fact' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
+              boxShadow: mode === 'fact' ? '0 2px 6px #1976d226' : 'none',
+              minWidth: 90,
+              padding: '.62rem 0'
+            }}
+            aria-label="Switch to Factorial Game"
+            tabIndex={0}
+          >
+            Factorial Game
+          </button>
         </div>
         <h1 style={{
           letterSpacing: '1.25px',
@@ -159,7 +181,9 @@ function App() {
           ? <SubtractionGame />
           : mode === 'mul'
           ? <MultiplicationGame />
-          : <DivisionGame />
+          : mode === 'div'
+          ? <DivisionGame />
+          : <FactorialGame />
         }
       </main>
       <footer style={{
