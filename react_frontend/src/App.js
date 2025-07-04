@@ -2,13 +2,22 @@ import React, { useState } from 'react';
 import './App.css';
 import Calculator from './Calculator';
 import AdditionGame from './AdditionGame';
+import SubtractionGame from './SubtractionGame';
 
 // PUBLIC_INTERFACE
 function App() {
-  // Mode: 'calc' or 'game'
+  // Mode: 'calc', 'add', or 'sub'
   const [mode, setMode] = useState('calc');
 
-  const mainHeader = mode === 'calc' ? "Calculator" : "Addition Game";
+  let mainHeader = '';
+  if (mode === 'calc') {
+    mainHeader = "Calculator";
+  } else if (mode === 'add') {
+    mainHeader = "Addition Game";
+  } else if (mode === 'sub') {
+    mainHeader = "Subtraction Game";
+  }
+
   return (
     <div className="App" style={{
       background: '#fafbfe',
@@ -53,23 +62,42 @@ function App() {
             Calculator
           </button>
           <button
-            onClick={() => setMode('game')}
+            onClick={() => setMode('add')}
             className="calc-btn"
             style={{
-              background: mode === 'game' ? '#1976d2' : '#ececec',
-              color: mode === 'game' ? '#fff' : '#1976d2',
+              background: mode === 'add' ? '#1976d2' : '#ececec',
+              color: mode === 'add' ? '#fff' : '#1976d2',
               fontWeight: 700,
               fontSize: '1rem',
               borderRadius: '10px',
-              border: mode === 'game' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
-              boxShadow: mode === 'game' ? '0 2px 6px #1976d226' : 'none',
+              border: mode === 'add' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
+              boxShadow: mode === 'add' ? '0 2px 6px #1976d226' : 'none',
               minWidth: 90,
               padding: '.62rem 0'
             }}
-            aria-label="Switch to Game"
+            aria-label="Switch to Addition Game"
             tabIndex={0}
           >
-            Game
+            Addition Game
+          </button>
+          <button
+            onClick={() => setMode('sub')}
+            className="calc-btn"
+            style={{
+              background: mode === 'sub' ? '#1976d2' : '#ececec',
+              color: mode === 'sub' ? '#fff' : '#1976d2',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '10px',
+              border: mode === 'sub' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
+              boxShadow: mode === 'sub' ? '0 2px 6px #1976d226' : 'none',
+              minWidth: 90,
+              padding: '.62rem 0'
+            }}
+            aria-label="Switch to Subtraction Game"
+            tabIndex={0}
+          >
+            Subtraction Game
           </button>
         </div>
         <h1 style={{
@@ -79,7 +107,9 @@ function App() {
           fontWeight: 800,
           fontSize: '2.05rem'
         }}>{mainHeader}</h1>
-        {mode === 'calc' ? <Calculator /> : <AdditionGame />}
+        {mode === 'calc' ? <Calculator />
+          : mode === 'add' ? <AdditionGame />
+          : <SubtractionGame />}
       </main>
       <footer style={{
           marginTop: 'auto',
