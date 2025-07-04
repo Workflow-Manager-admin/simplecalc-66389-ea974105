@@ -3,10 +3,11 @@ import './App.css';
 import Calculator from './Calculator';
 import AdditionGame from './AdditionGame';
 import SubtractionGame from './SubtractionGame';
+import MultiplicationGame from './MultiplicationGame';
 
 // PUBLIC_INTERFACE
 function App() {
-  // Mode: 'calc', 'add', or 'sub'
+  // Mode: 'calc', 'add', 'sub', or 'mul'
   const [mode, setMode] = useState('calc');
 
   let mainHeader = '';
@@ -16,6 +17,8 @@ function App() {
     mainHeader = "Addition Game";
   } else if (mode === 'sub') {
     mainHeader = "Subtraction Game";
+  } else if (mode === 'mul') {
+    mainHeader = "Multiplication Game";
   }
 
   return (
@@ -99,6 +102,25 @@ function App() {
           >
             Subtraction Game
           </button>
+          <button
+            onClick={() => setMode('mul')}
+            className="calc-btn"
+            style={{
+              background: mode === 'mul' ? '#1976d2' : '#ececec',
+              color: mode === 'mul' ? '#fff' : '#1976d2',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '10px',
+              border: mode === 'mul' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
+              boxShadow: mode === 'mul' ? '0 2px 6px #1976d226' : 'none',
+              minWidth: 90,
+              padding: '.62rem 0'
+            }}
+            aria-label="Switch to Multiplication Game"
+            tabIndex={0}
+          >
+            Multiplication Game
+          </button>
         </div>
         <h1 style={{
           letterSpacing: '1.25px',
@@ -107,9 +129,14 @@ function App() {
           fontWeight: 800,
           fontSize: '2.05rem'
         }}>{mainHeader}</h1>
-        {mode === 'calc' ? <Calculator />
-          : mode === 'add' ? <AdditionGame />
-          : <SubtractionGame />}
+        {mode === 'calc'
+          ? <Calculator />
+          : mode === 'add'
+          ? <AdditionGame />
+          : mode === 'sub'
+          ? <SubtractionGame />
+          : <MultiplicationGame />
+        }
       </main>
       <footer style={{
           marginTop: 'auto',
