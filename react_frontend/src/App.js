@@ -4,10 +4,11 @@ import Calculator from './Calculator';
 import AdditionGame from './AdditionGame';
 import SubtractionGame from './SubtractionGame';
 import MultiplicationGame from './MultiplicationGame';
+import DivisionGame from './DivisionGame';
 
 // PUBLIC_INTERFACE
 function App() {
-  // Mode: 'calc', 'add', 'sub', or 'mul'
+  // Mode: 'calc', 'add', 'sub', 'mul', 'div'
   const [mode, setMode] = useState('calc');
 
   let mainHeader = '';
@@ -19,6 +20,8 @@ function App() {
     mainHeader = "Subtraction Game";
   } else if (mode === 'mul') {
     mainHeader = "Multiplication Game";
+  } else if (mode === 'div') {
+    mainHeader = "Division Game";
   }
 
   return (
@@ -121,6 +124,25 @@ function App() {
           >
             Multiplication Game
           </button>
+          <button
+            onClick={() => setMode('div')}
+            className="calc-btn"
+            style={{
+              background: mode === 'div' ? '#1976d2' : '#ececec',
+              color: mode === 'div' ? '#fff' : '#1976d2',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '10px',
+              border: mode === 'div' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
+              boxShadow: mode === 'div' ? '0 2px 6px #1976d226' : 'none',
+              minWidth: 90,
+              padding: '.62rem 0'
+            }}
+            aria-label="Switch to Division Game"
+            tabIndex={0}
+          >
+            Division Game
+          </button>
         </div>
         <h1 style={{
           letterSpacing: '1.25px',
@@ -135,7 +157,9 @@ function App() {
           ? <AdditionGame />
           : mode === 'sub'
           ? <SubtractionGame />
-          : <MultiplicationGame />
+          : mode === 'mul'
+          ? <MultiplicationGame />
+          : <DivisionGame />
         }
       </main>
       <footer style={{
