@@ -6,10 +6,11 @@ import SubtractionGame from './SubtractionGame';
 import MultiplicationGame from './MultiplicationGame';
 import DivisionGame from './DivisionGame';
 import FactorialGame from './FactorialGame';
+import ModulusGame from './ModulusGame';
 
 // PUBLIC_INTERFACE
 function App() {
-  // Mode: 'calc', 'add', 'sub', 'mul', 'div', 'fact'
+  // Mode: 'calc', 'add', 'sub', 'mul', 'div', 'fact', 'mod'
   const [mode, setMode] = useState('calc');
 
   let mainHeader = '';
@@ -25,6 +26,8 @@ function App() {
     mainHeader = "Division Game";
   } else if (mode === 'fact') {
     mainHeader = "Factorial Game";
+  } else if (mode === 'mod') {
+    mainHeader = "Modulus Game";
   }
 
   return (
@@ -165,6 +168,25 @@ function App() {
           >
             Factorial Game
           </button>
+          <button
+            onClick={() => setMode('mod')}
+            className="calc-btn"
+            style={{
+              background: mode === 'mod' ? '#1976d2' : '#ececec',
+              color: mode === 'mod' ? '#fff' : '#1976d2',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '10px',
+              border: mode === 'mod' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
+              boxShadow: mode === 'mod' ? '0 2px 6px #1976d226' : 'none',
+              minWidth: 90,
+              padding: '.62rem 0'
+            }}
+            aria-label="Switch to Modulus Game"
+            tabIndex={0}
+          >
+            Modulus Game
+          </button>
         </div>
         <h1 style={{
           letterSpacing: '1.25px',
@@ -183,6 +205,8 @@ function App() {
           ? <MultiplicationGame />
           : mode === 'div'
           ? <DivisionGame />
+          : mode === 'mod'
+          ? <ModulusGame />
           : <FactorialGame />
         }
       </main>
