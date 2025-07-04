@@ -7,10 +7,14 @@ import MultiplicationGame from './MultiplicationGame';
 import DivisionGame from './DivisionGame';
 import FactorialGame from './FactorialGame';
 import ModulusGame from './ModulusGame';
+import SnakeGame from './SnakeGame';
 
-// PUBLIC_INTERFACE
+/*
+  PUBLIC_INTERFACE
+  Now supports Snake Game mode as well.
+*/
 function App() {
-  // Mode: 'calc', 'add', 'sub', 'mul', 'div', 'fact', 'mod'
+  // Modes: 'calc', 'add', 'sub', 'mul', 'div', 'fact', 'mod', 'snake'
   const [mode, setMode] = useState('calc');
 
   let mainHeader = '';
@@ -28,6 +32,8 @@ function App() {
     mainHeader = "Factorial Game";
   } else if (mode === 'mod') {
     mainHeader = "Modulus Game";
+  } else if (mode === 'snake') {
+    mainHeader = "Snake Game";
   }
 
   return (
@@ -47,12 +53,14 @@ function App() {
         alignItems: 'center',
         justifyContent: 'center'
       }}>
+        {/* Mode Toggling Bar */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
           gap: '1.1rem',
-          marginBottom: '1.7rem'
+          marginBottom: '1.7rem',
+          flexWrap: 'wrap'
         }}>
           <button
             onClick={() => setMode('calc')}
@@ -187,6 +195,25 @@ function App() {
           >
             Modulus Game
           </button>
+          <button
+            onClick={() => setMode('snake')}
+            className="calc-btn"
+            style={{
+              background: mode === 'snake' ? '#1976d2' : '#ececec',
+              color: mode === 'snake' ? '#fff' : '#1976d2',
+              fontWeight: 700,
+              fontSize: '1rem',
+              borderRadius: '10px',
+              border: mode === 'snake' ? '1.5px solid #1976d2' : '1.2px solid #e5e7eb',
+              boxShadow: mode === 'snake' ? '0 2px 6px #1976d226' : 'none',
+              minWidth: 90,
+              padding: '.62rem 0'
+            }}
+            aria-label="Switch to Snake Game"
+            tabIndex={0}
+          >
+            Snake Game
+          </button>
         </div>
         <h1 style={{
           letterSpacing: '1.25px',
@@ -207,6 +234,8 @@ function App() {
           ? <DivisionGame />
           : mode === 'mod'
           ? <ModulusGame />
+          : mode === 'snake'
+          ? <SnakeGame />
           : <FactorialGame />
         }
       </main>
